@@ -5,22 +5,18 @@ import numpy as np
 import streamlit as st
 import torch
 
-from my_resnet import device, my_resnet
-from wave_solve import range_fft, reshape_radar, read_random
+from my_resnet import my_resnet
+from wave_solve import range_fft, reshape_radar
 
 
 def frame_output(one_frame, model_path):
     one_frame_input = torch.tensor(one_frame, dtype=torch.float32)
     one_frame_input = torch.reshape(one_frame_input, [1, 1, 24, 3])
-    one_frame_input = one_frame_input.to(device)
 
     resnet = my_resnet(model_path)
-    resnet = resnet.to(device)
     resnet = resnet.eval()
 
     output = resnet(one_frame_input)
-
-    output = output.cpu()
     output = output.detach().numpy()
 
     return output[0]
