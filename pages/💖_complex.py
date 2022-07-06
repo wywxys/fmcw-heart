@@ -43,7 +43,7 @@ def draw_chart(radar_one_file, model_path, bpm, chart):
         temp_rate = int_temp
 
         new_rows = last_rows + list(result)
-        status_text.text("%i%% Complete" % (i / (len(radar_one_file) - 1)))
+        status_text.text("%i%% Complete" % (i * 100 / (len(radar_one_file) - 1)))
         chart.line_chart(new_rows)
         progress_bar.progress(i)
         last_rows = new_rows
