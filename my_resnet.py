@@ -42,7 +42,7 @@ def my_resnet(net_path=''):
     temp_resnet.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
 
     if net_path:
-        temp_resnet.load_state_dict(torch.load(net_path, map_location=‘cpu’))
+        temp_resnet.load_state_dict(torch.load(net_path, map_location='cpu'))
 
     return temp_resnet
 
