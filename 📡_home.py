@@ -23,8 +23,9 @@ def describe():
     st.markdown(
         """
         ### 心率检测模式
-        - <a href="/complex/" target="_self">详情模式</a>——提供心率变化监测的更多信息
-        - <a href="/complex/" target="_self">简略模式</a>——呃呃呃 &emsp; 这个还没写
+        - 在右上角分页处可以选择不同的心率检测模式，分为以下两种
+        - <a href="https://wywxys-fmcw-heart--home-fdy36i.streamlitapp.com/complex/" target="_self">详情模式</a>——提供心率变化监测的更多信息
+        - <a href="https://wywxys-fmcw-heart--home-fdy36i.streamlitapp.com/complex/" target="_self">简略模式</a>——呃呃呃 &emsp; 这个还没写
         """
         , unsafe_allow_html=True
     )
