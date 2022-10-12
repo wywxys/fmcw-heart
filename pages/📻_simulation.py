@@ -57,11 +57,11 @@ def form_submit():
 
 def run_outside():
     st.set_page_config(
-        page_title="详情模式-心率监测",
-        page_icon="💖",
+        page_title="模拟监测模式-心率监测",
+        page_icon="📻",
     )
 
-    st.title('FMCW雷达心率监测')
+    st.title('FMCW模拟心率监测')
     form_submit()
 
 
