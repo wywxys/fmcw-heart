@@ -97,11 +97,11 @@ def run_outside():
     select_path = './resource/train_test.npy'
 
     st.set_page_config(
-        page_title="详情模式-心率监测",
+        page_title="单条数据分析模式-心率监测",
         page_icon="💖",
     )
 
-    st.title('FMCW雷达心率监测')
+    st.title('FMCW单条数据分析')
     form_submit(model_path)
 
 
