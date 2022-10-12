@@ -24,7 +24,7 @@ def describe():
         """
         ### 心率检测模式
         - 在左上角分页处可以选择不同的心率检测模式，分为以下三种：
-        - <a href="https://wywxys-fmcw-heart--home-fdy36i.streamlitapp.com/complex/" target="_self">单条数据分析</a>——对雷达数据进行心率预测，可用于科研分析
+        - <a href="https://wywxys-fmcw-heart--home-fdy36i.streamlitapp.com/single/" target="_self">单条数据分析</a>——对雷达数据进行心率预测，可用于科研分析
         - <a href="https://wywxys-fmcw-heart--home-fdy36i.streamlitapp.com/simulation/" target="_self">模拟监测</a>——模拟雷达数据输入，可用于员工培训
         - 实时监测——用于本地部署连接雷达
         """
