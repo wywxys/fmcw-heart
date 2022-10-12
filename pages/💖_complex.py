@@ -2,21 +2,32 @@ import os
 import time
 
 import numpy as np
+import pandas as pd
 import streamlit as st
 import torch
 
-from my_resnet import my_resnet
+from my_resnet import device, my_resnet
 from wave_solve import range_fft, reshape_radar
+
+
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
 
 
 def frame_output(one_frame, model_path):
     one_frame_input = torch.tensor(one_frame, dtype=torch.float32)
     one_frame_input = torch.reshape(one_frame_input, [1, 1, 24, 3])
+    one_frame_input = one_frame_input.to(device)
 
     resnet = my_resnet(model_path)
+    resnet = resnet.to(device)
     resnet = resnet.eval()
 
     output = resnet(one_frame_input)
+
+    output = output.cpu()
     output = output.detach().numpy()
 
     return output[0]
@@ -59,7 +70,8 @@ def file_predict(file_num, model_path, bpm, chart):
     radar_one_file = reshape_radar(radar)  # (51, 24, 3)
 
     out_predict = draw_chart(radar_one_file, model_path, bpm, chart)
-    return out_predict
+    out_csv = pd.Series(out_predict, name='HeartRate')
+    return convert_df(out_csv)
 
 
 def form_submit(model_path):
@@ -71,7 +83,13 @@ def form_submit(model_path):
     chart = st.line_chart([0])
 
     if submitted:
-        file_predict(select_num, model_path, bpm, chart)  # index 0-47
+        csv = file_predict(select_num, model_path, bpm, chart)  # index 0-47
+        st.download_button(
+            label="Download HeartRate as CSV",
+            data=csv,
+            file_name='HeartRate.csv',
+            mime='text/csv',
+        )
 
 
 def run_outside():
