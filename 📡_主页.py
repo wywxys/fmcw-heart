@@ -25,7 +25,7 @@ def describe():
         ### 心率检测模式
         - <a href="/complex/" target="_self">单条数据分析</a>——对雷达数据进行心率预测，可用于科研分析
         - <a href="/simulation/" target="_self">模拟监测</a>——模拟雷达数据输入，可用于员工培训
-        - 实时监测——用于本地部署连接雷达
+        - <a href="/simulation/" target="_self">实时监测</a>——用于本地部署连接雷达
         """
         , unsafe_allow_html=True
     )
