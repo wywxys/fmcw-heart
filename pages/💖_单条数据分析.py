@@ -85,9 +85,9 @@ def form_submit(model_path):
         submitted = st.form_submit_button(label='开始监测')
 
     col1, col2, col3 = st.columns(3)
-    col1.metric('心跳速率', '--BPM', '--')
-    col2.metric('最大心率', '--BPM', '--')
-    col3.metric('最低心率', '--BPM', '--')
+    col1.metric('心跳速率', '--BPM', None)
+    col2.metric('最大心率', '--BPM', None)
+    col3.metric('最低心率', '--BPM', None)
 
     bpm = [col1, col2, col3]
     chart = st.line_chart([0])
