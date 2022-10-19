@@ -19,13 +19,13 @@ def draw_chart(still_time, bpm, chart):
         result = np.random.randint(60, 80)
         print(result)
 
-        bpm.metric(label='心跳速率', value=str(result) + 'BPM', delta=str(result - temp_rate))
+        bpm[0].metric(label='心跳速率', value=str(result) + 'BPM', delta=str(result - temp_rate))
         temp_rate = int(result)
 
         last_rows.append(result)
         
-        bpm[0].metric(label='最大心率', value=str(max(last_rows)) + 'BPM', delta=None)
-        bpm[0].metric(label='最低心率', value=str(min(last_rows)) + 'BPM', delta=None)
+        bpm[1].metric(label='最大心率', value=str(max(last_rows)) + 'BPM', delta=None)
+        bpm[2].metric(label='最低心率', value=str(min(last_rows)) + 'BPM', delta=None)
         
         chart.line_chart(last_rows)
         time.sleep(1)
@@ -47,9 +47,9 @@ def form_submit():
         submitted = st.form_submit_button(label='开始监测')
 
     col1, col2, col3 = st.columns(3)
-    col1.metric('心跳速率', '--BPM', '--')
-    col2.metric('最大心率', '--BPM', '--')
-    col3.metric('最低心率', '--BPM', '--')
+    col1.metric('心跳速率', '--BPM', None)
+    col2.metric('最大心率', '--BPM', None)
+    col3.metric('最低心率', '--BPM', None)
 
     bpm = [col1, col2, col3]
     chart = st.line_chart([0])
