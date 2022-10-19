@@ -53,8 +53,8 @@ def draw_chart(radar_one_file, model_path, bpm, chart):
         status_text.text("%i%% Complete" % (i * 100 / (len(radar_one_file) - 1)))
         chart.line_chart(new_rows)
         
-        bpm[0].metric(label='最大心率', value=str(max(new_rows)) + 'BPM', delta=None)
-        bpm[0].metric(label='最低心率', value=str(min(new_rows)) + 'BPM', delta=None)
+        bpm[1].metric(label='最大心率', value=str(max(new_rows)) + 'BPM', delta=None)
+        bpm[2].metric(label='最低心率', value=str(min(new_rows)) + 'BPM', delta=None)
 
         
         progress_bar.progress(i)
