@@ -89,7 +89,7 @@ def form_submit(model_path):
     col2.metric('最大心率', '--BPM', None)
     col3.metric('最低心率', '--BPM', None)
 
-    bpm = [col1, col2, col3]
+    bpm = (col1, col2, col3)
     chart = st.line_chart([0])
 
     if submitted:
