@@ -46,12 +46,17 @@ def draw_chart(radar_one_file, model_path, bpm, chart):
         print(result)
 
         int_temp = round(result[0])
-        bpm.metric(label='心跳速率', value=str(int_temp) + 'BPM', delta=str(int_temp - temp_rate))
+        bpm[0].metric(label='心跳速率', value=str(int_temp) + 'BPM', delta=str(int_temp - temp_rate))
         temp_rate = int_temp
 
         new_rows = last_rows + list(result)
         status_text.text("%i%% Complete" % (i * 100 / (len(radar_one_file) - 1)))
         chart.line_chart(new_rows)
+        
+        bpm[0].metric(label='最大心率', value=str(max(new_rows)) + 'BPM', delta=None)
+        bpm[0].metric(label='最低心率', value=str(min(new_rows)) + 'BPM', delta=None)
+
+        
         progress_bar.progress(i)
         last_rows = new_rows
         time.sleep(1)
@@ -79,7 +84,12 @@ def form_submit(model_path):
         select_num = st.selectbox('选择测试集中的一个文件', range(47))
         submitted = st.form_submit_button(label='开始监测')
 
-    bpm = st.metric(label='心跳速率', value='--BPM', delta='--')
+    col1, col2, col3 = st.columns(3)
+    col1.metric('心跳速率', '--BPM', '--')
+    col2.metric('最大心率', '--BPM', '--')
+    col3.metric('最低心率', '--BPM', '--')
+
+    bpm = [col1, col2, col3]
     chart = st.line_chart([0])
 
     if submitted:
