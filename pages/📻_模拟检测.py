@@ -23,6 +23,10 @@ def draw_chart(still_time, bpm, chart):
         temp_rate = int(result)
 
         last_rows.append(result)
+        
+        bpm[0].metric(label='最大心率', value=str(max(last_rows)) + 'BPM', delta=None)
+        bpm[0].metric(label='最低心率', value=str(min(last_rows)) + 'BPM', delta=None)
+        
         chart.line_chart(last_rows)
         time.sleep(1)
 
@@ -42,7 +46,12 @@ def form_submit():
         select_num = st.slider('选择模拟检测的持续时间（s）', 0, 60, 30)
         submitted = st.form_submit_button(label='开始监测')
 
-    bpm = st.metric(label='心跳速率', value='--BPM', delta='--')
+    col1, col2, col3 = st.columns(3)
+    col1.metric('心跳速率', '--BPM', '--')
+    col2.metric('最大心率', '--BPM', '--')
+    col3.metric('最低心率', '--BPM', '--')
+
+    bpm = [col1, col2, col3]
     chart = st.line_chart([0])
 
     if submitted:
